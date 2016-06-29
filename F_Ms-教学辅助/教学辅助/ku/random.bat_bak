@@ -1,0 +1,77 @@
+@echo off&setlocal enabledelayedexpansion
+if "%1"=="/?" goto help
+if not "%3"=="" set /a temprandomcount=%3+1&if not "!temprandomcount!"=="1" for /l %%i in (1,1,%3) do %0 %1 %2
+if not "%2"=="" echo %2|findstr /b [0-9]>nul&if "!errorlevel!"=="0" set randomnum=%2
+if not defined randomnum set randomnum=8
+if "%1"=="" call:word&call:word2&call:number&goto redo
+set temprandom=%1
+if /i "%temprandom:~0,2%"=="d:" (
+	for /l %%i in (0,1,8192) do if "!temprandom:~%%i,1!"=="" set /a widenum=%%i-2&goto randomtemptemp
+) else goto randomchoose
+:randomtemptemp
+set diy=!temprandom:~2,%widenum%!
+goto redo
+:randomchoose
+echo %1|findstr a>nul
+if "%errorlevel%"=="0" call:word
+echo %1|findstr A>nul
+if "%errorlevel%"=="0" call:word2
+echo %1|findstr [0-9]>nul
+if "%errorlevel%"=="0" call:number
+echo %1|findstr @>nul
+if "%errorlevel%"=="0" call:fuhao
+:redo
+set randomku=%word%%word2%%number%%fuhao%%diy%
+if "%randomku%"=="" goto help
+set /a randomwide=%random%%%%widenum%
+set /a randomdijia+=1
+for %%i in (!randomwide!) do set /p=!randomku:~%%i,1!<nul
+if %randomdijia% lss %randomnum% goto redo
+echo=
+endlocal
+
+goto end
+:word
+set word=abcdefghijklmnopqrstuvwxyz&set /a widenum=widenum+26
+goto :eof
+
+:word2
+set word2=ABCDEFGHIJKLMNOPQRSTUVWXYZ&set /a widenum=widenum+26
+goto :eof
+
+:number
+set number=1234567890&set /a widenum=widenum+10
+goto :eof
+
+:fuhao
+set fuhao=`~@#$()_+-[]{};',.&set /a widenum=widenum+18
+goto :eof
+
+:help
+echo Example£º
+echo=
+for /f %%i in ("%0") do set randomname=%%~ni
+for /f %%i in ('%0') do set helprandom=%%i
+echo     %randomname%            %helprandom%
+for /f %%i in ('%0 %random:~-1%') do set helprandom=%%i
+echo     %randomname% %random:~-1%          %helprandom%
+for /f %%i in ('%0 a 30') do set helprandom=%%i
+echo     %randomname% a 30       %helprandom%
+for /f %%i in ('%0 Aa 15') do set helprandom=%%i
+echo     %randomname% Aa 15      %helprandom%
+for /f %%i in ('%0 %random:~-1%aA@ 25') do set helprandom=%%i
+echo     %randomname% %random:~-1%aA@ 25    %helprandom%
+for /f %%i in ('%0 d:F_Ms 20') do set helprandom=%%i
+echo     %randomname% d:F_Ms 20  %helprandom%
+echo=
+call:word&call:word2&call:number&call:fuhao
+echo        [0-9] = %number%
+echo            a = %word%
+echo            A = %word2%
+echo            @ = %fuhao%
+echo          d:* = *
+echo=
+echo                                          F_Ms
+
+:end
+

@@ -1,0 +1,44 @@
+dn: CN=ftpVirtualPaths,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpVirtualPaths
+adminDescription: The virtual paths of this user
+adminDisplayName: ftpVirtualPaths
+attributeID: 1.2.840.113556.1.8000.2374.2.36
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: FALSE
+
+dn: CN=ftpUserQuotaUnit,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpUserQuotaUnit
+adminDescription: FTP User disk quota unit in KB or MB
+adminDisplayName: ftpUserQuotaUnit
+attributeID: 1.2.840.113556.1.8000.2374.2.37
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 4
+
+dn:
+changetype: modify
+add: schemaUpdateNow
+schemaUpdateNow: 1
+-
+
+dn: CN=xlightFTPdUser,CN=Schema,CN=Configuration,DC=X
+changetype: modify
+add: mayContain
+mayContain: ftpVirtualPaths
+mayContain: ftpUserQuotaUnit
+-
+
+dn:
+changetype: modify
+add: schemaUpdateNow
+schemaUpdateNow: 1
+-

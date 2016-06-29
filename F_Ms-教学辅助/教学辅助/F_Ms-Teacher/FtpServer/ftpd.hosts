@@ -1,0 +1,5 @@
+<virtualserver 0.0.0.0:52125>
+AntiIdle:yes
+DeletePartialUpload:yes
+</virtualserver>
+

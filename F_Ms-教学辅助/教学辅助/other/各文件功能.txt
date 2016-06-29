@@ -1,0 +1,27 @@
+F_Ms-Teacher	教学辅助服务器端存放目录
+-FtpServer	FTP服务器及配置文件存放目录
+-html	演示网页存放文件夹
+-tongbu	同步工具文件夹
+-F_Ms-教学辅助.bat	教学辅助服务器端主程序
+
+firstrun.ini	测试期间防止客户端乱跳功能
+fms.bat	找到随机目录并将各第三方程序配置等写入
+fms.ini_bak	rar.exe
+fms2.ini_bak	otherprogram
+random.bat_bak	random.bat
+fms4.ini_bak	ico&programgroup
+fms5.bat	客户端
+fms5.exe	编译后的客户端
+
+fms6.vbs	监视程序
+tiaoguo.bat	解脱程序
+update_test.bat	更新程序
+WipeData.txt	数据清除内容
+各文件功能.txt	介绍目录下各文件功能
+
+%appdata%\fms.fms	教辅客户端配置文件等存放位置
+%appdata%\fms2.fms	公共程序文件夹存放位置
+%appdata%\fms3.fms	教辅客户端PID文件储存位置
+%appdata%\fms4.fms	未发现被监视程序运行程序文件储存位置(路径两边需加引号)
+%appdata%\fms5.fms	VBS监视进程PID文件储存位置
+%appdata%\con\.fms	跳过进程是否关闭判断文件

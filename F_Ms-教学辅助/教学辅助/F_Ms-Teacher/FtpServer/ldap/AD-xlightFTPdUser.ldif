@@ -1,0 +1,536 @@
+dn: CN=ftpDisableAccount,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpDisableAccount
+adminDescription: Disable FTP account
+adminDisplayName: ftpDisableAccount
+attributeID: 1.2.840.113556.1.8000.2374.2.1
+attributeSyntax: 2.5.5.8
+oMSyntax: 1
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpAccountExpireTime,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpAccountExpireTime
+adminDescription: FTP account expire time
+adminDisplayName: ftpAccountExpireTime
+attributeID: 1.2.840.113556.1.8000.2374.2.2
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 24
+
+dn: CN=ftpGroupName,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpGroupName
+adminDescription: The FTP group this user belongs to
+adminDisplayName: ftpGroupName
+attributeID: 1.2.840.113556.1.8000.2374.2.3
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 64
+
+dn: CN=ftpHomeDirectory,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpHomeDirectory
+adminDescription: The absolute path to user home directory
+adminDisplayName: ftpHomeDirectory
+attributeID: 1.2.840.113556.1.8000.2374.2.4
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 255
+
+dn: CN=ftpHomePerm,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpHomePerm
+adminDescription: Control the access permission to home directory
+adminDisplayName: ftpHomePerm
+attributeID: 1.2.840.113556.1.8000.2374.2.5
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 10
+
+dn: CN=ftpHidePublicPath,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpHidePublicPath
+adminDescription: Hide public virtual path from this user
+adminDisplayName: ftpHidePublicPath
+attributeID: 1.2.840.113556.1.8000.2374.2.6
+attributeSyntax: 2.5.5.8
+oMSyntax: 1
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpHideGroupPath,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpHideGroupPath
+adminDescription: Hide group virtual path from this user
+adminDisplayName: ftpHideGroupPath
+attributeID: 1.2.840.113556.1.8000.2374.2.7
+attributeSyntax: 2.5.5.8
+oMSyntax: 1
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpBypassServerMax,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpBypassServerMax
+adminDescription: Bypass the maximum users limit in the ftp server
+adminDisplayName: ftpBypassServerMax
+attributeID: 1.2.840.113556.1.8000.2374.2.8
+attributeSyntax: 2.5.5.8
+oMSyntax: 1
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxDownloadSpeed,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxDownloadSpeed
+adminDescription: Maximum download speed in KB/s
+adminDisplayName: ftpMaxDownloadSpeed
+attributeID: 1.2.840.113556.1.8000.2374.2.9
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxUploadSpeed,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxUploadSpeed
+adminDescription: Maximum upload speed in KB/s
+adminDisplayName: ftpMaxUploadSpeed
+attributeID: 1.2.840.113556.1.8000.2374.2.10
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxUserConnections,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxUserConnections
+adminDescription: Maximum connections for this user
+adminDisplayName: ftpMaxUserConnections
+attributeID: 1.2.840.113556.1.8000.2374.2.11
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxConnectionsIP,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxConnectionsIP
+adminDescription: Maximum connections per IP for this user
+adminDisplayName: ftpMaxConnectionsIP
+attributeID: 1.2.840.113556.1.8000.2374.2.12
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxSessionTime,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxSessionTime
+adminDescription: Maximum session time for this user
+adminDisplayName: ftpMaxSessionTime
+attributeID: 1.2.840.113556.1.8000.2374.2.13
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxDownloadFileNum,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxDownloadFileNum
+adminDescription: Total files allowed to download in a session
+adminDisplayName: ftpMaxDownloadFileNum
+attributeID: 1.2.840.113556.1.8000.2374.2.14
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxUploadFileNum,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxUploadFileNum
+adminDescription: Total files allowed to upload in a session
+adminDisplayName: ftpMaxUploadFileNum
+attributeID: 1.2.840.113556.1.8000.2374.2.15
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpSessionMaxDownload,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpSessionMaxDownload
+adminDescription: Maximum amount (in MBytes) allowed to download in a session
+adminDisplayName: ftpSessionMaxDownload
+attributeID: 1.2.840.113556.1.8000.2374.2.16
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpSessionMaxUpload,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpSessionMaxUpload
+adminDescription: Maximum amount (in MBytes) allowed to upload in a session
+adminDisplayName: ftpSessionMaxUpload
+attributeID: 1.2.840.113556.1.8000.2374.2.17
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxDownloadFileSize,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxDownloadFileSize
+adminDescription: Maximum file size (in MBytes) allowed to download
+adminDisplayName: ftpMaxDownloadFileSize
+attributeID: 1.2.840.113556.1.8000.2374.2.18
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpMaxUploadFileSize,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpMaxUploadFileSize
+adminDescription: Maximum file size (in MBytes) allowed to upload
+adminDisplayName: ftpMaxUploadFileSize
+attributeID: 1.2.840.113556.1.8000.2374.2.19
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpEnableQuotas,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpEnableQuotas
+adminDescription: Enable quotas support
+adminDisplayName: ftpEnableQuotas
+attributeID: 1.2.840.113556.1.8000.2374.2.20
+attributeSyntax: 2.5.5.8
+oMSyntax: 1
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpUserSpaceQuotas,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpUserSpaceQuotas
+adminDescription: Disk space usage (in MBytes) allowed for this user
+adminDisplayName: ftpUserSpaceQuotas
+attributeID: 1.2.840.113556.1.8000.2374.2.21
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpEnableRatio,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpEnableRatio
+adminDescription: Enable ratio support
+adminDisplayName: ftpEnableRatio
+attributeID: 1.2.840.113556.1.8000.2374.2.22
+attributeSyntax: 2.5.5.8
+oMSyntax: 1
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpRatioType,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpRatioType
+adminDescription: Ratio type for this user
+adminDisplayName: ftpRatioType
+attributeID: 1.2.840.113556.1.8000.2374.2.23
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpRatioDownload,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpRatioDownload
+adminDescription: The first half of download/upload ratio
+adminDisplayName: ftpRatioDownload
+attributeID: 1.2.840.113556.1.8000.2374.2.24
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpRatioUpload,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpRatioUpload
+adminDescription: The second half of download/upload ratio
+adminDisplayName: ftpRatioUpload
+attributeID: 1.2.840.113556.1.8000.2374.2.25
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpRatioStartingCredit,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpRatioStartingCredit
+adminDescription: The starting ratio credit
+adminDisplayName: ftpRatioStartingCredit
+attributeID: 1.2.840.113556.1.8000.2374.2.26
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpUserCommandSpeed,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpUserCommandSpeed
+adminDescription: Number of ftp commands allowed in a second
+adminDisplayName: ftpUserCommandSpeed
+attributeID: 1.2.840.113556.1.8000.2374.2.27
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpAllowedUserLoginIP,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpAllowedUserLoginIP
+adminDescription: IP address allowed to login
+adminDisplayName: ftpAllowedUserLoginIP
+attributeID: 1.2.840.113556.1.8000.2374.2.28
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 255
+
+dn: CN=ftpDeniedUserLoginIP,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpDeniedUserLoginIP
+adminDescription: IP address denied to login
+adminDisplayName: ftpDeniedUserLoginIP
+attributeID: 1.2.840.113556.1.8000.2374.2.29
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 255
+
+dn: CN=ftpAllowedUserLoginTime,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpAllowedUserLoginTime
+adminDescription: Allowed login time to this user
+adminDisplayName: ftpAllowedUserLoginTime
+attributeID: 1.2.840.113556.1.8000.2374.2.30
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 255
+
+dn: CN=ftpFilesAllowedAccess,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpFilesAllowedAccess
+adminDescription: Files allowed to access to this user
+adminDisplayName: ftpFilesAllowedAccess
+attributeID: 1.2.840.113556.1.8000.2374.2.31
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 255
+
+dn: CN=ftpFilesDeniedAccess,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpFilesDeniedAccess
+adminDescription: Files denied to access to this user
+adminDisplayName: ftpFilesDeniedAccess
+attributeID: 1.2.840.113556.1.8000.2374.2.32
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 255
+
+dn: CN=ftpDeniedCommands,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpDeniedCommands
+adminDescription: FTP commands denied to this user
+adminDisplayName: ftpDeniedCommands
+attributeID: 1.2.840.113556.1.8000.2374.2.33
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 128
+
+dn: CN=ftpSendSocketBuffer,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpSendSocketBuffer
+adminDescription: Socket buffer for sending data
+adminDisplayName: ftpSendSocketBuffer
+attributeID: 1.2.840.113556.1.8000.2374.2.34
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpRecvSocketBuffer,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpRecvSocketBuffer
+adminDescription: Socket buffer for receiving data
+adminDisplayName: ftpRecvSocketBuffer
+attributeID: 1.2.840.113556.1.8000.2374.2.35
+attributeSyntax: 2.5.5.9
+oMSyntax: 2
+systemOnly: FALSE
+isSingleValued: TRUE
+
+dn: CN=ftpVirtualPaths,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpVirtualPaths
+adminDescription: The virtual paths of this user
+adminDisplayName: ftpVirtualPaths
+attributeID: 1.2.840.113556.1.8000.2374.2.36
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: FALSE
+
+dn: CN=ftpUserQuotaUnit,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: attributeSchema
+ldapDisplayName: ftpUserQuotaUnit
+adminDescription: FTP user disk quota unit in KB or MB
+adminDisplayName: ftpUserQuotaUnit
+attributeID: 1.2.840.113556.1.8000.2374.2.37
+attributeSyntax: 2.5.5.3
+oMSyntax: 27
+systemOnly: FALSE
+isSingleValued: TRUE
+rangeLower: 0
+rangeUpper: 4
+
+dn:
+changetype: modify
+add: schemaUpdateNow
+schemaUpdateNow: 1
+-
+
+dn: CN=xlightFTPdUser,CN=Schema,CN=Configuration,DC=X
+changetype: add
+objectClass: classSchema
+ldapDisplayName: xlightFTPdUser
+adminDescription: Xlight FTP Server user options
+adminDisplayName: xlightFTPdUser
+governsID: 1.2.840.113556.1.8000.2374.1.1
+objectClassCategory: 3
+subClassOf: top
+mayContain: ftpDisableAccount
+mayContain: ftpAccountExpireTime
+mayContain: ftpGroupName
+mayContain: ftpHomeDirectory
+mayContain: ftpHomePerm
+mayContain: ftpHidePublicPath
+mayContain: ftpHideGroupPath
+mayContain: ftpBypassServerMax
+mayContain: ftpMaxDownloadSpeed
+mayContain: ftpMaxUploadSpeed
+mayContain: ftpMaxUserConnections
+mayContain: ftpMaxConnectionsIP
+mayContain: ftpMaxSessionTime
+mayContain: ftpMaxDownloadFileNum
+mayContain: ftpMaxUploadFileNum
+mayContain: ftpSessionMaxDownload
+mayContain: ftpSessionMaxUpload
+mayContain: ftpMaxDownloadFileSize
+mayContain: ftpMaxUploadFileSize
+mayContain: ftpEnableQuotas
+mayContain: ftpUserSpaceQuotas
+mayContain: ftpEnableRatio
+mayContain: ftpRatioType
+mayContain: ftpRatioDownload
+mayContain: ftpRatioUpload
+mayContain: ftpRatioStartingCredit
+mayContain: ftpUserCommandSpeed
+mayContain: ftpAllowedUserLoginIP
+mayContain: ftpDeniedUserLoginIP
+mayContain: ftpAllowedUserLoginTime
+mayContain: ftpFilesAllowedAccess
+mayContain: ftpFilesDeniedAccess
+mayContain: ftpDeniedCommands
+mayContain: ftpSendSocketBuffer
+mayContain: ftpRecvSocketBuffer
+mayContain: ftpVirtualPaths
+mayContain: ftpUserQuotaUnit
+
+dn:
+changetype: Modify
+add: schemaUpdateNow
+schemaUpdateNow: 1
+-
+
+dn: CN=User,CN=Schema,CN=Configuration,DC=X
+changetype: Modify
+add: auxiliaryClass
+auxiliaryClass: xlightFTPdUser
+-
+
+dn:
+changetype: Modify
+add: schemaUpdateNow
+schemaUpdateNow: 1
+-

@@ -1,0 +1,15 @@
+System.useCodepage = true;
+var Txtload= new LoadVars();
+Txtload.onLoad = function(success) {
+if (success) {
+trace("载入成功！");
+trace(Txtload.UserName)
+trace(Txtload.Age)
+A.text = Txtload.UserName
+B.text = Txtload.Age
+} else {
+trace("载入失败！");
+gotoAndStop("shibai")
+}
+};
+Txtload.load("Apollo.txt")

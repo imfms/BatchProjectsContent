@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 setlocal ENABLEDELAYEDEXPANSION
-title 文档收集便捷工具箱 20160625 ^| F_Ms ^| f-ms.cn
+title 文档收集便捷工具箱 20160706 ^| F_Ms ^| f-ms.cn
 
 REM 工具箱基本变量配置
 REM set debug=yes
@@ -53,10 +53,10 @@ REM 用户删除情况
 set mainList_doFlag=
 if "%mainList_userInput:~0,1%"=="-" (
 	if "%mainList_userInput:~1%"=="" (
-		set/p mainList_userInput=#请输入被删除工具的名称或序列:
+		set/p mainList_userInput=#请输入被删除列表的名称或序列:
+		if "!mainList_userInput!"=="" goto mainList
 		set mainList_userInput=-!mainList_userInput!
 	)
-	call:queRen #确认删除?||goto mainList
 	set mainList_userInput=!mainList_userInput:~1!
 	set mainList_doFlag=delete
 )
@@ -102,6 +102,7 @@ set subListFile=%workDir%\%subListFile%
 
 REM 用户删除列表情况
 if /i "%mainList_doFlag%"=="delete" (
+	call:queRen #确认删除?||goto mainList
 	call:Database_DeleteLine /q "%mainListFile%" "%mainList_userInput%" "1"
 	if exist "%subListFile%" del /f /q "%subListFile%"
 	goto mainList
@@ -150,9 +151,9 @@ REM 删除
 if "%subList_userInput:~0,1%"=="-" (
 	if "%subList_userInput:~1%"=="" (
 		set/p subList_userInput=#请输入被删除工具的名称或序列:
+		if "!subList_userInput!"=="" goto subList
 		set subList_userInput=-!subList_userInput!
 	)
-	call:queRen #确认删除?||goto subList
 	set subList_userInput=!subList_userInput:~1!
 	set subList_doFlag=delete
 )
@@ -193,6 +194,7 @@ REM 用户输入序号情况
 
 REM 删除情况
 if /i "%subList_doFlag%"=="delete" (
+	call:queRen #确认删除?||goto subList
 	call:Database_DeleteLine /q "%subListFile%" "%subList_userInput%" "1"
 	goto subList
 )

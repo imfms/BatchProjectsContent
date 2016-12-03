@@ -1,1 +1,0 @@
-@"%~dp0\QQ_SLK2WAV.bat" /mp3 %*

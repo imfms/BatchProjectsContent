@@ -1,99 +1,5 @@
 @echo off
 setlocal ENABLEDELAYEDEXPANSION
-set path=%path%;%~dp0
-set version=20161203
-title QQ_SLK2WAV QQ音频文件slk转wav批处理工具 ^| F_Ms - %version% ^| f-ms.cn
-
-REM 判断运行环境
-if "%~1"=="" (
-	echo=#简介
-	echo=		 QQ_SLK2WAV
-	echo=
-	echo=     腾讯qq语音音频文件slk转wav批处理工具
-	echo=  作者：F_Ms ^| 博客：f-ms.cn ^| 版本：%version%
-	echo=
-	echo=#使用方法：
-	echo=	将要转换的QQ语音音频文件^(.slk^)或文件夹
-	echo=	   拖动到本程序文件上即可^(非本窗口^)
-	pause>nul
-	exit/b
-) else if not exist "%~1" if not exist "%~1\" (
-	echo=#简介
-	echo=		 QQ_SLK2WAV
-	echo=
-	echo=     腾讯qq语音音频文件slk转wav批处理工具
-	echo=  作者：F_Ms ^| 博客：f-ms.cn ^| 版本：%version%
-	echo=
-	echo=#警告：
-	echo=	指定文件或文件夹不存在
-	pause>nul
-	exit/b
-)
-set folderFile=
-
-color 0a
-echo=
-echo=#简介
-echo=
-echo=		 QQ_SLK2WAV
-echo=
-echo=     腾讯qq语音音频文件slk转wav批处理工具
-echo=
-echo=	  -使用到的第三方命令行工具-
-echo=	      split(textutils)
-echo=	  SilkDecoder(无原作者信息)
-echo=	  FFmpeg (FFmpegDevelopers)
-echo=	             敬上
-echo=
-echo=  作者：F_Ms ^| 博客：f-ms.cn ^| 版本：%version%
-echo=
-echo=#转换开始
-echo=
-
-REM 单文件转换
-if not exist "%~1\" (
-	REM 将转换路径设置为源文件路径下新文件夹内
-	set "descDir=%~dpnx1"
-	set "errorListFile=%~1.convert_error_infor.txt"
-	call:convert "%~1" "!descDir!_after_convert" "!errorListFile!"
-	goto converEnd
-)
-
-REM 相对全路径中截取子路径变量
-set "baseDir=%~1"
-if not "%baseDir:~-1%"=="\" set "baseDir=%baseDir%\"
-
-REM 转换结果目录
-set "descDir=%~1"
-if "%descDir:~-1%"=="\" set "descDir=%descDir:~0,-1%"
-set "descDir=%descDir%_after_convert\"
-
-REM 转换错误信息路径
-set "errorListFile=%baseDir:~0,-1%.convert_error_list.txt"
-
-REM 目录遍历转换
-for /r "%~1\" %%a in (*) do if exist "%%~a" (
-	REM 将装换路径设置为原路径下新文件夹内,如果有子文件夹则拼合到新文件夹下
-	set "targetDir=%%~dpa"
-	set "targetDir=!targetDir:%baseDir%=!"
-	call:convert "%%~a" "%descDir%!targetDir!" "%errorListFile%"
-)
-
-:converEnd
-REM 安静模式
-if /i "%~2"=="/Q" exit/b
-
-REM 正常模式
-echo=#转换结束
-echo=
-REM 如果有错误日志则打开错误日志
-if exist "%errorListFile%" start "" "%errorListFile%"
-pause>nul
-
-
-goto end
-REM --------------------------------------子程序区域--------------------------------------
-:begin
 
 REM 主子程序 call:convert "待转换文件" "转换结束目标路径"
 :convert
@@ -106,7 +12,7 @@ set "fileTargetPath=%~2"
 set "convertFailFileList=%~3"
 set "yuanFile=%~1"
 for /f "delims=" %%a in ("%yuanFile%") do (
-	set "newWavFileName=%%~na.wav"
+	set "newWavFileName=%%~na.%outputFormat%"
 	set "tempFile=%%~na"
 )
 set "tempFile=%tempFile: =%"
@@ -165,8 +71,7 @@ if not "%errorlevel%"=="0" (
 )
 
 REM 判断是否真正执行成功
-set wavEmptyFileSize=40000
-call:fileSizeTrue %wavEmptyFileSize% "%fileTargetPath%\%newWavFileName%"
+call:fileSizeTrue %formatMinSize% "%fileTargetPath%\%newWavFileName%"
 if "%errorlevel%"=="0" if "%kbps%"=="44100" (
 	set kbps=16000
 	set tempFilePcm2Wav=%yuanFile%
@@ -235,7 +140,7 @@ exit/b %errorlevel%
 REM pcm2wav转换 call:pcm2wav 比特率 inputFile outputFile
 :pcm2wav
 if exist "%~3" del /f /q "%~3"
-pcm2wav.exe -f s16le -ar %~1 -ac 1 -i "%~2" -ar 44100 -ac 2 -f wav "%~3" 0>nul 1>nul 2>nul
+pcm2wav.exe -f s16le -ar %~1 -ac 1 -i "%~2" -ar 44100 -ac 2 -f %outputFormat% "%~3" 0>nul 1>nul 2>nul
 exit/b %errorlevel%
 
 REM 错误日志写入 错误类型 错误文件
@@ -248,5 +153,3 @@ if not exist "%convertFailFileList%" echo=#转换错误日志>"%convertFailFileList%"
 REM 写入错误主题
 echo=	"%~2"	%~1>>"%convertFailFileList%"
 exit/b
-
-:end

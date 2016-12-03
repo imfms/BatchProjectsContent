@@ -4,6 +4,18 @@ set path=%path%;%~dp0
 set version=20161203
 title QQ_SLK2WAV QQ音频文件slk转wav批处理工具 ^| F_Ms - %version% ^| f-ms.cn
 
+REM 输出格式设置
+if /i "%~1"=="/mp3" (
+	REM MP3
+	set "outputFormat=mp3"
+	set "formatMinSize=1"
+	shift/1
+) else (
+	REM WAV
+	set "outputFormat=wav"
+	set "formatMinSize=40000"
+)
+
 REM 判断运行环境
 if "%~1"=="" (
 	echo=#简介
@@ -29,7 +41,6 @@ if "%~1"=="" (
 	pause>nul
 	exit/b
 )
-set folderFile=
 
 color 0a
 echo=
@@ -106,7 +117,7 @@ set "fileTargetPath=%~2"
 set "convertFailFileList=%~3"
 set "yuanFile=%~1"
 for /f "delims=" %%a in ("%yuanFile%") do (
-	set "newWavFileName=%%~na.wav"
+	set "newWavFileName=%%~na.%outputFormat%"
 	set "tempFile=%%~na"
 )
 set "tempFile=%tempFile: =%"
@@ -165,8 +176,7 @@ if not "%errorlevel%"=="0" (
 )
 
 REM 判断是否真正执行成功
-set wavEmptyFileSize=40000
-call:fileSizeTrue %wavEmptyFileSize% "%fileTargetPath%\%newWavFileName%"
+call:fileSizeTrue %formatMinSize% "%fileTargetPath%\%newWavFileName%"
 if "%errorlevel%"=="0" if "%kbps%"=="44100" (
 	set kbps=16000
 	set tempFilePcm2Wav=%yuanFile%
@@ -235,7 +245,7 @@ exit/b %errorlevel%
 REM pcm2wav转换 call:pcm2wav 比特率 inputFile outputFile
 :pcm2wav
 if exist "%~3" del /f /q "%~3"
-pcm2wav.exe -f s16le -ar %~1 -ac 1 -i "%~2" -ar 44100 -ac 2 -f wav "%~3" 0>nul 1>nul 2>nul
+pcm2wav.exe -f s16le -ar %~1 -ac 1 -i "%~2" -ar 44100 -ac 2 -f %outputFormat% "%~3" 0>nul 1>nul 2>nul
 exit/b %errorlevel%
 
 REM 错误日志写入 错误类型 错误文件

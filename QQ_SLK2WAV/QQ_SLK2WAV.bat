@@ -1,6 +1,7 @@
 @echo off
+setlocal ENABLEDELAYEDEXPANSION
 set path=%path%;%~dp0
-set version=20160316
+set version=20161203
 title QQ_SLK2WAV QQ音频文件slk转wav批处理工具 ^| F_Ms - %version% ^| f-ms.cn
 
 REM 判断运行环境
@@ -48,17 +49,32 @@ echo=  作者：F_Ms ^| 博客：f-ms.cn ^| 版本：%version%
 echo=
 echo=#转换开始
 echo=
-REM echo=#转换开始
 
-if not exist "%~1\" call:convert "%~1"&goto converEnd
+REM 单文件转换
+if not exist "%~1\" (
+	REM 将转换路径设置为源文件路径下新文件夹内
+	set "descDir=%~dpnx1"
+	call:convert "%~1" "!descDir!_after_convert"
+	goto converEnd
+)
 
+REM 目录遍历转换
 set folderFile=Yes
-for /r "%~1\" %%a in (*) do if exist "%%~a" call:convert "%%~a"
+
+set "baseDir=%~dp1"
+set "descDir=%~dp1"
+set "descDir=!descDir:~0,-1!_after_convert\"
+
+for /r "%~1\" %%a in (*) do if exist "%%~a" (
+	REM 将装换路径设置为原路径下新文件夹内,如果有子文件夹则拼合到新文件夹下
+	set "targetDir=%%~dpa"
+	set "targetDir=!targetDir:%baseDir%=!"
+	call:convert "%%~a" "%descDir%!targetDir!"
+)
 
 :converEnd
 echo=#转换结束
 echo=
-REM echo=#转换结束
 pause>nul
 
 
@@ -67,13 +83,13 @@ goto end
 REM 子程序区域
 :begin
 
-REM 主子程序 call:convert "待转换文件"
+REM 主子程序 call:convert "待转换文件" "转换结束目标路径"
 :convert
 cd /d "%~dp1"
 set/p=^|	正在转换: "%~1" ^> <nul
 call:VarCSH "%~1" "%folderFile%"
-REM 文件前期处理
 
+REM 文件前期处理
 call:fileSizeTrue 50 "%~1"
 if "%errorlevel%"=="0" (
 	echo= #空文件,已跳过
@@ -92,6 +108,9 @@ if "%errorlevel%"=="0" (
 	exit/b 1
 ) else if "%errorlevel%"=="2" (
 	echo= # AMR格式为通用格式,已跳过
+	REM 拷贝直接拷贝源文件到目标路径
+	if not exist "%newWavFilePath%" md "%newWavFilePath%"
+	copy "%~1" "%newWavFilePath%\%newWavFileName%.amr">nul 2>nul
 	if defined convertFailFileList echo=通用音频格式 "%~1">>"%convertFailFileList%"
 	exit/b 1
 )

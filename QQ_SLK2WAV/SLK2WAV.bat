@@ -1,6 +1,6 @@
 @echo off
 setlocal ENABLEDELAYEDEXPANSION
-set path=%path%;%~dp0
+set "path=%path%;%~dp0\bin"
 set version=20161203
 title QQ_SLK2WAV QQ音频文件slk转wav批处理工具 ^| F_Ms - %version% ^| f-ms.cn
 

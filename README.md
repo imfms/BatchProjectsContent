@@ -86,10 +86,6 @@
 		学习Java时写的辅助编译小工具
 		Javac.exe, java.exe ~~~
 
-- QQ_SLK2WAV
-	
-		QQ语音SLK编码格式音频转换到WAV批处理工具
-
 - VNC_BookLink
 	
 	> 支持屏幕墙~支持屏幕墙~支持屏幕墙

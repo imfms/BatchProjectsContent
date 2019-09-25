@@ -35,7 +35,8 @@ if /i "%os%"=="Win7" (
 )
 
 REM 检查操作系统版本是否吻合，否则提示退出
-if /i "%os%"=="other" exit
+REM 不再拦截不支持的系统版本
+REM if /i "%os%"=="other" exit
 
 for %%a in (fms.ini fms2.ini fms4.ini random.bat) do if not exist "%myfiles%\%%a" copy "%myfiles%\%%a_bak" "%myfiles%\%%a">nul
 

@@ -77,7 +77,6 @@ REM 检查配置公共程序、配置文件
 call:checkrunfolder
 
 REM 更改标题、设置各密码、更改字体颜色、设置yuanexe变量为当前文件路径
-color 0a
 set yuanexepath=%~dp0
 set yuanexename=%~nx0
 set yuanexe=%~dp0%~nx0

@@ -19,6 +19,7 @@ update_test.bat	更新程序
 WipeData.txt	数据清除内容
 各文件功能.txt	介绍目录下各文件功能
 
+%appdata%\fms0.fms  是否为教辅客户端首次运行(不受二次运行、连接的限制)
 %appdata%\fms.fms	教辅客户端配置文件等存放位置
 %appdata%\fms2.fms	公共程序文件夹存放位置
 %appdata%\fms3.fms	教辅客户端PID文件储存位置

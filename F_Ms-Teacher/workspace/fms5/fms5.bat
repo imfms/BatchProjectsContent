@@ -1128,7 +1128,7 @@ goto :eof
 
 REM 重启explorer 使用方法：call:resetexplorer
 :resetexplorer
-if /i "%os%"=="Win7" if "%osw%"=="64" (
+if "%osw%"=="64" (
 	start "" ResetExplorer.exe
 	goto :eof
 )

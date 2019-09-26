@@ -78,7 +78,7 @@ if /i "%~1"=="StartUp" (
 if not exist config\F_Ms-Teacher_TeacherPassword.ini if not exist config\getCloudPWDA_Data.fms (
 	ping -n 2 %serveraddress% >nul 2>nul&&(
 		echo=正在从云端获取密码...
-		pagedown %serveraddress%/F_Ms-Teacher_TeacherPassword.ini config\F_Ms-Teacher_TeacherPassword.ini
+		wget -q %serveraddress%/F_Ms-Teacher_TeacherPassword.ini -O config\F_Ms-Teacher_TeacherPassword.ini
 	)
 	echo=Yes>config\getCloudPWDA_Data.fms
 )
@@ -294,7 +294,7 @@ REM 从云端获取屏蔽库
 if not exist ftp\commandsend\ProgramKuUpdate.rar if not exist config\getCloudKu_Data.fms (
 	ping -n 2 %serveraddress% >nul 2>nul&&(
 		call:tips 正在从云端获取屏蔽库文件
-		pagedown %serveraddress%/F_Ms-Teacher_ProgramKu.rar ftp\commandsend\ProgramKuUpdate.rar
+		wget -q %serveraddress%/F_Ms-Teacher_ProgramKu.rar -O ftp\commandsend\ProgramKuUpdate.rar
 	)
 	echo=Yes>config\getCloudKu_Data.fms
 )

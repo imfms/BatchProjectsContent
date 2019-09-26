@@ -19,7 +19,7 @@ if /i "%PROCESSOR_IDENTIFIER:~0,3%"=="x86" (set osw=32) else set osw=64
 
 REM 检查操作系统版本是否吻合，否则提示退出
 if /i "%os%"=="Other" (
-	start mshta vbscript:msgbox^("软件未在当前版本系统进行测试，运行时可能会有错误发生",64,"提示"^)^(window.close^)
+	start mshta vbscript:msgbox^("软件未在当前版本系统进行测试，运行时可能会有未预料到的问题发生",64,"提示"^)^(window.close^)
 )
 
 REM 获取自己的PID并且写入%appdata%\fms7.fms

